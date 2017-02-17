@@ -35,6 +35,7 @@ public class MainApp extends Application {
     // Sample data
     public MainApp(){
         partData.add(new InHouse(12,"abc",12,12,12,12,123));
+        partData.add(new InHouse(123,"abcefg",122,122,122,122,1234));
     }
 
     @Override
