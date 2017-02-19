@@ -1,6 +1,8 @@
 package WGU.nball4.IMS;
 
 import java.io.IOException;
+import java.util.Random;
+
 import WGU.nball4.IMS.model.InHouse;
 import WGU.nball4.IMS.model.Inventory;
 import WGU.nball4.IMS.model.Part;
@@ -42,10 +44,16 @@ public class MainApp extends Application {
         partData.add(new InHouse(1,"five",1,1,1,1,1));
         partData.add(new InHouse(1,"six",1,1,1,1,1));
         partData.add(new InHouse(1,"seven",1,1,1,1,1));
+
+        partData.add(new InHouse(1,"eight",1,1,1,1,1));
+        partData.add(new InHouse(1,"nine",1,1,1,1,1));
+        partData.add(new InHouse(1,"eight",1,1,1,1,1));
+        partData.add(new InHouse(1,"nine",1,1,1,1,1));
         partData.add(new InHouse(1,"eight",1,1,1,1,1));
         partData.add(new InHouse(1,"nine",1,1,1,1,1));
 
         inventory = new Inventory();
+        generateFakeData();
     }
 
     //Methods
@@ -217,6 +225,20 @@ public class MainApp extends Application {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    private void generateFakeData(){
+
+
+        for (int x=0; x < 10; x++){
+            Random rn = new Random();
+            int number = rn.nextInt(100 - 1 + 1)+1;
+            Random rn2 = new Random();
+            double double1 = rn2.nextDouble();
+
+            inventory.addProduct(new Product(new InHouse(number,Integer.toString(number),number,number,number,number,number),Integer.toString(number),number,double1,number,number,number));
+
+        }
     }
 
     public static void main(String[] args) {

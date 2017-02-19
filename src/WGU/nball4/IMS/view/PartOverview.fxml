@@ -66,7 +66,7 @@
                 <padding><Insets bottom="5" left="5" right="5" top="5" /> </padding>
                 <children>
                     <Label id="imsMainPartsLabel" fx:id="imsMainProductLabel" text="Products" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
-                    <Button id="imsMainPartsSearchButton" fx:id="imsMainProductSearchButton" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                    <Button id="imsMainPartsSearchButton" fx:id="imsMainProductSearchButton" onAction="#handleSearchProducts" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                     <TextField id="imsMainPartsSearchField" fx:id="imsMainProductSearchField" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="75.0" />
                 </children>
             </AnchorPane>
@@ -99,8 +99,12 @@
     <VBox id="imsMainBottomVbox" fx:id="imsMainBottomVbox" alignment="BOTTOM_RIGHT">
         <padding><Insets bottom="25" left="25" right="25" top="25" /> </padding>
         <VBox.margin> <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /> </VBox.margin>
-
-        <Button id="imsMainExitButton" fx:id="imsMainExitButton" mnemonicParsing="false" text="Exit" />
+      <ButtonBar>
+         <buttons>
+      
+              <Button id="imsMainExitButton" fx:id="imsMainExitButton" onAction="#handleExit" mnemonicParsing="false" text="Exit" />
+         </buttons>
+      </ButtonBar>
 
     </VBox>
 

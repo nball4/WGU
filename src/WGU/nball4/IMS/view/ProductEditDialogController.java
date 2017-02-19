@@ -5,11 +5,17 @@ import WGU.nball4.IMS.MainApp;
 import WGU.nball4.IMS.model.Part;
 import WGU.nball4.IMS.model.Product;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArrayBase;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import WGU.nball4.IMS.MainApp;
+
+import java.util.Comparator;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 /**
@@ -64,7 +70,11 @@ public class ProductEditDialogController {
 
     public void setMainApp(MainApp mainApp){
         this.mainApp = mainApp;
-        allPartsTable.setItems(mainApp.getPartData());}
+        ObservableList<Part> tempData = mainApp.getPartData().stream().sorted(Comparator.comparing(Part::getName)).collect(Collectors.toCollection(()-> FXCollections.observableArrayList()));
+        allPartsTable.setItems(tempData);
+
+
+    }
 
     public ProductEditDialogController(){}
 
@@ -225,31 +235,74 @@ public class ProductEditDialogController {
     }
 
     @FXML private void searchAllParts(){
-        for (Part part : allPartsTable.getItems()){
+        int counter = 0;
+        Part tempPart;
 
-            if (part.getName().equals(productsAllPartsSearchTextField.getText())){
+            for (Part part : allPartsTable.getItems()) {
+                if (part.getName().equals(productsAllPartsSearchTextField.getText())) {
+                    counter++;
+                }
+            }
 
-                allPartsTable.getSelectionModel().select(part);
-                allPartsTable.scrollTo(part);
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.initOwner(dialogStage);
-                alert.setTitle("Part Found");
-                alert.setHeaderText("Part Found!");
-                alert.setContentText("Would you like to add the part to the current Product?");
-                Optional<ButtonType> results = alert.showAndWait();
-                if (results.get() == ButtonType.OK) {
+                if (counter > 1) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.initOwner(dialogStage);
+                    alert.setTitle("Part Found");
+                    alert.setHeaderText("More than one Part was found");
+                    alert.setContentText("Please select the correct Part then add to Product using add button");
 
-                    currentPartsTable.getItems().add(part);
+
+                    for (Part part1 : allPartsTable.getItems()) {
+                        if (part1.getName().equals(productsAllPartsSearchTextField.getText())) {
+
+                            allPartsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                            allPartsTable.getSelectionModel().select(part1);
+                            allPartsTable.scrollTo(allPartsTable.getItems().indexOf(part1)-counter+1);
+
+
+                        }
+
+
+                    }
 
                 }
+                if (counter == 1) {
+                    for (Part part1 : allPartsTable.getItems()) {
+                        if (part1.getName().equals(productsAllPartsSearchTextField.getText())) {
+                            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert1.initOwner(dialogStage);
+                            alert1.setTitle("Part Found");
+                            alert1.setHeaderText("Part Found!");
+                            alert1.setContentText("Would you like to add the part to the current Product?");
+                            Optional<ButtonType> results1 = alert1.showAndWait();
 
+                            if (results1.get() == ButtonType.OK) {
+
+                                currentPartsTable.getItems().add(part1);
+
+                            }
+
+                        }
+                    }
+                }
+                if (counter == 0) {
+                    System.out.println(counter);
+                    Alert alert2 = new Alert(Alert.AlertType.WARNING);
+                    alert2.initOwner(dialogStage);
+                    alert2.setTitle("Part NOT Found");
+                    alert2.setHeaderText("Part was NOT found!");
+                    alert2.setContentText("Please try searching again.");
+                    alert2.showAndWait();
+
+
+                }
             }
 
 
         }
-    }
 
 
-}
+
+
 
 
