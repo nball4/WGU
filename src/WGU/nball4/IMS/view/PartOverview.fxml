@@ -27,8 +27,8 @@
                 <padding><Insets bottom="5" left="5" right="5" top="5" /> </padding>
                 <children>
                     <Label id="imsMainPartsLabel" fx:id="imsMainPartsLabel" text="Parts" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
-                    <Button id="imsMainPartsSearchButton" fx:id="imsMainPartsSearchButton" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                    <TextField id="imsMainPartsSearchField" fx:id="imsMainPartsSearchField" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="75.0" />
+                    <Button id="imsMainPartsSearchButton" fx:id="imsMainPartsSearchButton" onAction="#handleSearchButton" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                    <TextField id="imsMainPartsSearchField" fx:id="imsMainPartsSearchField" promptText="Search Part Name" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="75.0" />
                 </children>
             </AnchorPane>
         </top>
@@ -36,10 +36,10 @@
             <TableView fx:id="partTable">
                 <padding><Insets bottom="5" left="5" right="5" top="5" /> </padding>
                 <columns>
-                    <TableColumn fx:id="partIDColumn" editable="false" minWidth="200.0" prefWidth="-1.0" text="Part ID" />
-                    <TableColumn fx:id="nameColumn" editable="false" minWidth="200.0" prefWidth="-1.0" text="Part Name" />
-                    <TableColumn fx:id="inventoryColumn" editable="false" minWidth="200.0" prefWidth="-1.0" text="Inventory level" />
-                    <TableColumn fx:id="priceColumn" editable="false" minWidth="200.0" prefWidth="-1.0" text="Price / Cost" />
+                    <TableColumn fx:id="partIDColumn" editable="false" minWidth="195.0" prefWidth="-1.0" text="Part ID" />
+                    <TableColumn fx:id="nameColumn" editable="false" minWidth="195.0" prefWidth="-1.0" text="Part Name" />
+                    <TableColumn fx:id="inventoryColumn" editable="false" minWidth="195.0" prefWidth="-1.0" text="Inventory level" />
+                    <TableColumn fx:id="priceColumn" editable="false" minWidth="195.0" prefWidth="-1.0" text="Price / Cost" />
                 </columns>
             </TableView>
         </center>
@@ -65,7 +65,7 @@
             <AnchorPane BorderPane.alignment="CENTER">
                 <padding><Insets bottom="5" left="5" right="5" top="5" /> </padding>
                 <children>
-                    <Label id="imsMainPartsLabel" fx:id="imsMainProductLabel" text="Parts" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                    <Label id="imsMainPartsLabel" fx:id="imsMainProductLabel" text="Products" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
                     <Button id="imsMainPartsSearchButton" fx:id="imsMainProductSearchButton" text="Search" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                     <TextField id="imsMainPartsSearchField" fx:id="imsMainProductSearchField" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="75.0" />
                 </children>
@@ -75,10 +75,10 @@
             <TableView fx:id="productTable">
                 <padding><Insets bottom="5" left="5" right="5" top="5" /> </padding>
                 <columns>
-                    <TableColumn fx:id="productIDColumn" editable="false" minWidth="200.0" prefWidth="-1.0" text="Product ID" />
-                    <TableColumn fx:id="productnameColumn" editable="false" minWidth="200.0" prefWidth="-1.0" text="Product Name" />
-                    <TableColumn fx:id="productinventoryColumn" editable="false" minWidth="200.0" prefWidth="-1.0" text="Inventory level" />
-                    <TableColumn fx:id="productpriceColumn" editable="false" minWidth="200.0" prefWidth="-1.0" text="Price / Cost" />
+                    <TableColumn fx:id="productIDColumn" editable="false" minWidth="195.0" prefWidth="-1.0" text="Product ID" />
+                    <TableColumn fx:id="productnameColumn" editable="false" minWidth="195.0" prefWidth="-1.0" text="Product Name" />
+                    <TableColumn fx:id="productinventoryColumn" editable="false" minWidth="195.0" prefWidth="-1.0" text="Inventory level" />
+                    <TableColumn fx:id="productpriceColumn" editable="false" minWidth="195.0" prefWidth="-1.0" text="Price / Cost" />
                 </columns>
             </TableView>
         </center>

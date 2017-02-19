@@ -1,5 +1,7 @@
 package WGU.nball4.IMS.model;
 
+import WGU.nball4.IMS.MainApp;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 public class Inventory {
 
     // Instance Variables
-    private ObservableList<Product> products;
+    private ObservableList<Product> products = FXCollections.observableArrayList();;
 
     public ObservableList<Product> getProducts() {
         return products;
@@ -20,6 +22,13 @@ public class Inventory {
         this.products = products;
     }
 
+    private MainApp mainApp;
+
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+
+    }
     public Inventory() {
     }
 

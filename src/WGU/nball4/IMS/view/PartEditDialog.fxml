@@ -51,7 +51,7 @@
             <TextField id="AddPartMinTextField" fx:id="addPartMinTextField" prefHeight="25.0" prefWidth="174.0" promptText="Min" GridPane.columnIndex="2" GridPane.rowIndex="6" />
 
             <Label id="AddPartCompanyNameLabel" fx:id="addPartCompanyNameLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField id="AddPartCompanyNameTextField" fx:id="addPartCompanyNameTextField" visible="false" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+            <TextField id="AddPartCompanyNameTextField" fx:id="addPartCompanyNameTextField"  promptText="Machine ID" visible="false" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
 
             <ButtonBar id="AddPartButtonBar" fx:id="addPartButtonBar" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="2">
                 <buttons>

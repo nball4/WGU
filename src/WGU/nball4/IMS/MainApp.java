@@ -26,17 +26,29 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Part> partData = FXCollections.observableArrayList();
-    private Inventory inventory = new Inventory();
+    private Inventory inventory;
 
+    //Getters
     public Inventory getInventory(){ return inventory;}
     public ObservableList<Part> getPartData(){return partData;}
 
 
     // Sample data
     public MainApp(){
-        partData.add(new InHouse(12,"abc",12,12,12,12,123));
-        partData.add(new InHouse(123,"abcefg",122,122,122,122,1234));
+        partData.add(new InHouse(1,"one",1,1,1,1,1));
+        partData.add(new InHouse(1,"two",1,1,1,1,1));
+        partData.add(new InHouse(1,"three",1,1,1,1,1));
+        partData.add(new InHouse(1,"four",1,1,1,1,1));
+        partData.add(new InHouse(1,"five",1,1,1,1,1));
+        partData.add(new InHouse(1,"six",1,1,1,1,1));
+        partData.add(new InHouse(1,"seven",1,1,1,1,1));
+        partData.add(new InHouse(1,"eight",1,1,1,1,1));
+        partData.add(new InHouse(1,"nine",1,1,1,1,1));
+
+        inventory = new Inventory();
     }
+
+    //Methods
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -105,7 +117,7 @@ public class MainApp extends Application {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Part");
+            dialogStage.setTitle("Modify Part");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -116,7 +128,7 @@ public class MainApp extends Application {
             PartEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setMainApp(this);
-            controller.getAddPartLabel().setText("Edit Part");
+            controller.getAddPartLabel().setText("Modify Part");
             controller.setPart(part);
 
             // Show the dialog and wait until the user closes it
@@ -139,7 +151,7 @@ public class MainApp extends Application {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Part");
+            dialogStage.setTitle("New Part");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -164,7 +176,7 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showProductEditDialog() {
+    public boolean showProductEditDialog(Product product) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -173,7 +185,10 @@ public class MainApp extends Application {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Part");
+            dialogStage.setTitle("Modify Part");
+            if(product.getName() == null){
+                dialogStage.setTitle("Add Product");
+            }
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -184,7 +199,10 @@ public class MainApp extends Application {
             ProductEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setMainApp(this);
-            //controller.setProduct(product);
+            if(product.getName() == null){
+                controller.getaddProductLabel().setText("Add Product");
+            }
+            controller.setProduct(product);
 
             // Show the dialog and wait until the user closes it
 

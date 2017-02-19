@@ -4,14 +4,13 @@ package WGU.nball4.IMS.view;
 import WGU.nball4.IMS.model.Product;
 import javafx.beans.property.SimpleObjectProperty;
         import javafx.fxml.FXML;
-        import javafx.scene.control.Alert;
-        import javafx.scene.control.Alert.AlertType;
-        import javafx.scene.control.Label;
-        import javafx.scene.control.TableColumn;
-        import javafx.scene.control.TableView;
-        import WGU.nball4.IMS.MainApp;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import WGU.nball4.IMS.MainApp;
         import WGU.nball4.IMS.model.Part;
         import WGU.nball4.IMS.model.InHouse;
+
+import java.util.Optional;
 
 public class PartOverviewController {
 
@@ -26,6 +25,7 @@ public class PartOverviewController {
     @FXML private TableColumn<Product, String> productIDColumn;
     @FXML private TableColumn<Product, String> productinventoryColumn;
     @FXML private TableColumn<Product, String> productpriceColumn;
+    @FXML private TextField imsMainPartsSearchField;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -36,6 +36,7 @@ public class PartOverviewController {
 
         // Add observable list data to the table
         partTable.setItems(mainApp.getPartData());
+        productTable.setItems(mainApp.getInventory().getProducts());
     }
 
     //constructor
@@ -43,21 +44,35 @@ public class PartOverviewController {
     }
 
     //Initializes the controller class - automatically called
-    @FXML
-    private void initialize() {
+    @FXML private void initialize() {
         // Initialize the parts table with the columns.
         partIDColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Integer.toString(cellData.getValue().getPartID())));
         nameColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getName()));
         inventoryColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Integer.toString(cellData.getValue().getInStock())));
         priceColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Double.toString(cellData.getValue().getPrice())));
 
+
+        productIDColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Integer.toString(cellData.getValue().getProductID())));
+        productnameColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getName()));
+        productinventoryColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Integer.toString(cellData.getValue().getInStock())));
+        productpriceColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Double.toString(cellData.getValue().getPrice())));
+
     }
 
-    @FXML
-    private void handleDeletePart() {
+    @FXML private void handleDeletePart() {
         int selectedIndex = partTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            partTable.getItems().remove(selectedIndex);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cancel Confirmation");
+            alert.setHeaderText("Are you sure?");
+            alert.setContentText("You will lose any progress if you select OK!");
+
+            Optional<ButtonType> results = alert.showAndWait();
+            if (results.get() == ButtonType.OK){
+
+                partTable.getItems().remove(selectedIndex);
+            }
+
         } else {
             // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
@@ -70,15 +85,13 @@ public class PartOverviewController {
         }
     }
 
-    @FXML
-    private void handleNewPart () {
+    @FXML private void handleNewPart () {
 
       mainApp.showPartNewDialog();
 
     }
 
-    @FXML
-    private void handleEditPart() {
+    @FXML private void handleEditPart() {
         Part selectedPart = partTable.getSelectionModel().getSelectedItem();
         if (selectedPart != null) {
             mainApp.showPartEditDialog(selectedPart);
@@ -97,11 +110,32 @@ public class PartOverviewController {
         }
     }
 
-    @FXML
-    private void handleDeleteProduct() {
+    @FXML private void handleDeleteProduct() {
         int selectedIndex = productTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            productTable.getItems().remove(selectedIndex);
+            if (productTable.getSelectionModel().getSelectedItem().getParts().isEmpty()){
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Cancel Confirmation");
+                alert.setHeaderText("Are you sure?");
+                alert.setContentText("You will lose any progress if you select OK!");
+
+                Optional<ButtonType> results = alert.showAndWait();
+                if (results.get() == ButtonType.OK){
+
+                    productTable.getItems().remove(selectedIndex);
+                }
+            } else {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.initOwner(mainApp.getPrimaryStage());
+                alert.setTitle("Warning");
+                alert.setHeaderText("Product has parts associated");
+                alert.setContentText("You cannot delete a product that has parts associated with it.");
+
+                alert.showAndWait();
+            }
+
+
         } else {
             // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
@@ -114,18 +148,20 @@ public class PartOverviewController {
         }
     }
 
-    @FXML
-    private void handleNewProduct() {
+    @FXML private void handleNewProduct() {
 
+        Product tempProduct = new Product();
+        boolean okClicked =  mainApp.showProductEditDialog((tempProduct));
+        if (okClicked) {
+            mainApp.getInventory().addProduct(tempProduct);
+        }
 
-        mainApp.showProductEditDialog();
 
 
     }
 
-    @FXML
-    private void handleEditProduct() {
-        /**
+    @FXML private void handleEditProduct() {
+
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
             mainApp.showProductEditDialog(selectedProduct);
@@ -141,8 +177,35 @@ public class PartOverviewController {
 
             alert.showAndWait();
         }
-         */
+
     }
 
+    @FXML private void handleSearchButton() {
+
+        for (Part part : partTable.getItems()){
+
+            if (part.getName().equals(imsMainPartsSearchField.getText())){
+
+                partTable.getSelectionModel().select(part);
+                partTable.scrollTo(part);
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.initOwner(mainApp.getPrimaryStage());
+                alert.setTitle("Part Found");
+                alert.setHeaderText("Part Found!");
+                alert.setContentText("Your Part was found would you like to edit?");
+                Optional<ButtonType> results = alert.showAndWait();
+                if (results.get() == ButtonType.OK) {
+
+                    mainApp.showPartEditDialog(part);
+
+                }
+
+            }
+
+
+        }
+
+
+    }
 
 }
