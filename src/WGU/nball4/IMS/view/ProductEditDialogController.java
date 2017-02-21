@@ -119,6 +119,7 @@ public class ProductEditDialogController {
         if (selectedIndex >= 0) {
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.initOwner(dialogStage);
                 alert.setTitle("Delete Confirmation");
                 alert.setHeaderText("Are you sure?");
                 alert.setContentText("You will remove the part from the product!");
@@ -133,7 +134,7 @@ public class ProductEditDialogController {
         else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.initOwner(mainApp.getPrimaryStage());
+            alert.initOwner(dialogStage);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Part Selected");
             alert.setContentText("Please select a part in the table.");
@@ -145,6 +146,7 @@ public class ProductEditDialogController {
     @FXML private void handleCancel(){
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initOwner(dialogStage);
         alert.setTitle("Cancel Confirmation");
         alert.setHeaderText("Are you sure?");
         alert.setContentText("You will lose any progress if you select OK!");

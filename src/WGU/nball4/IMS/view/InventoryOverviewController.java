@@ -3,6 +3,7 @@ package WGU.nball4.IMS.view;
 
 import WGU.nball4.IMS.model.Product;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -39,9 +40,14 @@ public class InventoryOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table sorted by name alphabetically
+        SortedList<Part> sortedList = new SortedList<>(mainApp.getPartData());
 
-        partTable.setItems(mainApp.getPartData().sorted(Comparator.comparing(Part::getName)));
-        productTable.setItems(mainApp.getInventory().getProducts().sorted(Comparator.comparing(Product::getName)));
+        partTable.setItems(sortedList);
+        sortedList.comparatorProperty().bind(partTable.comparatorProperty());
+
+        SortedList<Product> sortedProductList = new SortedList<>(mainApp.getInventory().getProducts());
+        sortedProductList.comparatorProperty().bind(productTable.comparatorProperty());
+        productTable.setItems(sortedProductList);
 
     }
     //this sets the dialog page
@@ -62,6 +68,8 @@ public class InventoryOverviewController {
         nameColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getName()));
         inventoryColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Integer.toString(cellData.getValue().getInStock())));
         priceColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Double.toString(cellData.getValue().getPrice())));
+
+
 
         // Initialize the products table with the columns
         productIDColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Integer.toString(cellData.getValue().getProductID())));
@@ -215,6 +223,7 @@ public class InventoryOverviewController {
 
         if (counter > 1) {
             Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(dialogStage);
             alert.setTitle("Part Found");
             alert.setHeaderText("More than one Part was found");
             alert.setContentText("Please select the correct Part then complete edit or delete action");
@@ -238,6 +247,7 @@ public class InventoryOverviewController {
             for (Part part1 : partTable.getItems()) {
                 if (part1.getName().equals(imsMainPartsSearchField.getText())) {
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert1.initOwner(dialogStage);
                     alert1.setTitle("Part Found");
                     alert1.setHeaderText("Part Found!");
                     alert1.setContentText("Would you like to Edit the part?");
@@ -254,6 +264,7 @@ public class InventoryOverviewController {
         }
         if (counter == 0) {
             Alert alert2 = new Alert(Alert.AlertType.WARNING);
+            alert2.initOwner(dialogStage);
             alert2.setTitle("Part NOT Found");
             alert2.setHeaderText("Part was NOT found!");
             alert2.setContentText("Please try searching again.");
@@ -276,6 +287,7 @@ public class InventoryOverviewController {
 
         if (counter > 1) {
             Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(dialogStage);
             alert.setTitle("Product Found");
             alert.setHeaderText("More than one Product by the same name was found");
             alert.setContentText("Please select the correct Product then complete edit or delete action");
@@ -299,6 +311,7 @@ public class InventoryOverviewController {
             for (Product product : productTable.getItems()) {
                 if (product.getName().equals(imsMainProductSearchField.getText())) {
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert1.initOwner(dialogStage);
                     alert1.setTitle("Product Found");
                     alert1.setHeaderText("Product Found!");
                     alert1.setContentText("Would you like to Edit the product?");
@@ -315,6 +328,7 @@ public class InventoryOverviewController {
         }
         if (counter == 0) {
             Alert alert2 = new Alert(Alert.AlertType.WARNING);
+            alert2.initOwner(dialogStage);
             alert2.setTitle("Product NOT Found");
             alert2.setHeaderText("Product was NOT found!");
             alert2.setContentText("Please try searching again.");
