@@ -1,5 +1,7 @@
 .root {
-
+-fx-background-color: lightGrey;
+}
+.background{
 }
 .label {
     -fx-font-size: 11pt;
@@ -17,7 +19,7 @@
     -fx-border-color: Black;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: lightGrey;
+    -fx-background-color: Grey;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: Black;

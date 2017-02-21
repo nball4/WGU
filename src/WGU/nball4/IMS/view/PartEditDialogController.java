@@ -15,35 +15,20 @@ import java.util.Optional;
 
 import static java.lang.Float.NaN;
 
-
-/**
- * Created by nicholas on 2/13/2017.
- */
 public class PartEditDialogController {
 
     //Variables from fxml
-    @FXML
-    private RadioButton addPartInHouseRadio;
-    @FXML
-    private RadioButton addPartOutsourcedRadio;
-    @FXML
-    private Label addPartCompanyNameLabel;
-    @FXML
-    private TextField addPartCompanyNameTextField;
-    @FXML
-    private TextField addPartIDTextField;
-    @FXML
-    private TextField addPartPartNameTextField;
-    @FXML
-    private TextField addPartPriceTextField;
-    @FXML
-    private TextField addPartMinTextField;
-    @FXML
-    private TextField addPartMaxTextField;
-    @FXML
-    private TextField addPartInventoryTextField;
-    @FXML
-    private Label addPartLabel;
+    @FXML private RadioButton addPartInHouseRadio;
+    @FXML private RadioButton addPartOutsourcedRadio;
+    @FXML private Label addPartCompanyNameLabel;
+    @FXML private TextField addPartCompanyNameTextField;
+    @FXML private TextField addPartIDTextField;
+    @FXML private TextField addPartPartNameTextField;
+    @FXML private TextField addPartPriceTextField;
+    @FXML private TextField addPartMinTextField;
+    @FXML private TextField addPartMaxTextField;
+    @FXML private TextField addPartInventoryTextField;
+    @FXML private Label addPartLabel;
 
 
 
@@ -54,9 +39,13 @@ public class PartEditDialogController {
     private boolean okClicked = false;
     private MainApp mainApp;
 
+
     // Initializes the controller class - automatically called
     @FXML private void initialize() {
     }
+
+
+    //Handlers
 
     // attempts to save a part either new or edited after validation, then adds the new part to the partData list. Closes window
     @FXML
@@ -106,11 +95,12 @@ public class PartEditDialogController {
                 this.dialogStage.close();
 
             }
-        }catch (Exception e){}
-/*
+        }
+
         catch(Exception e)
 
     {
+        /*
         isInputValid();
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(dialogStage);
@@ -118,11 +108,10 @@ public class PartEditDialogController {
         alert.setHeaderText("It looks like something broke :(");
         alert.setContentText("I did not handel this exception. Sorry");
         alert.showAndWait();
-
-    }
 */
-}
+    }
 
+}
 
     //confirms cancellation with alert then closes the window
     @FXML private void handleCancel(){
@@ -143,60 +132,6 @@ public class PartEditDialogController {
 
     }
 
-    //gets the label so it can be set to say add or Modify
-    public Label getAddPartLabel() {
-        return addPartLabel;
-    }
-
-    //this sets the dialog page
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-
-    }
-
-    // this sets the part information from end users select. if edit button was pressed.
-    public void setPart(Part part) {
-
-        if (part instanceof InHouse) {
-
-            this.inHouse = (InHouse) part;
-
-            addPartInHouseRadio.setSelected(true);
-            setRadio();
-            addPartCompanyNameTextField.setText(Integer.toString(((InHouse) part).getMachineID()));
-            addPartIDTextField.setText(Integer.toString(part.getPartID()));
-            addPartPartNameTextField.setText(part.getName());
-            addPartInventoryTextField.setText(Integer.toString(part.getInStock()));
-            addPartMaxTextField.setText(Integer.toString(part.getMax()));
-            addPartMinTextField.setText(Integer.toString(part.getMin()));
-            addPartPriceTextField.setText(Double.toString(part.getPrice()));
-
-        }
-        if (part instanceof Outsourced) {
-
-            this.outSourced = (Outsourced) part;
-            addPartOutsourcedRadio.setSelected(true);
-            setRadio();
-            addPartCompanyNameTextField.setText(((Outsourced) part).getCompanyName());
-            addPartIDTextField.setText(Integer.toString(part.getPartID()));
-            addPartPartNameTextField.setText(part.getName());
-            addPartInventoryTextField.setText(Integer.toString(part.getInStock()));
-            addPartMaxTextField.setText(Integer.toString(part.getMax()));
-            addPartMinTextField.setText(Integer.toString(part.getMin()));
-            addPartPriceTextField.setText(Double.toString(part.getPrice()));
-
-
-        }
-
-
-
-
-    }
-
-    //sets the mainapp object to give reference back to one that called it.
-    public void setMainApp(MainApp mainApp){
-        this.mainApp = mainApp;}
-
     //returns ok clicked status back to the main app that made the part edit dialog window
     public boolean isOkClicked() {
         return okClicked;
@@ -204,28 +139,9 @@ public class PartEditDialogController {
 
     //listens to radio button.
     public void radioSelect(ActionEvent event) {
-     setRadio();
+        setRadio();
 
     }
-
-    // if either radio is selected, this sets the information needed
-    private void setRadio(){
-         if (addPartInHouseRadio.isSelected()) {
-             addPartCompanyNameLabel.setText("Machine ID");
-             addPartCompanyNameTextField.setPromptText("Machine ID");
-             addPartCompanyNameTextField.setVisible(true);
-             addPartOutsourcedRadio.setSelected(false);
-
-
-         }
-         if (addPartOutsourcedRadio.isSelected()) {
-             addPartCompanyNameLabel.setText("Company Name");
-             addPartCompanyNameTextField.setPromptText("Company Name");
-             addPartCompanyNameTextField.setVisible(true);
-             addPartInHouseRadio.setSelected(false);
-         }
-
-     }
 
     // listens to the most of the TextFields and links to the calls that resets it
     @FXML private void handleOnClicked(MouseEvent e){
@@ -234,7 +150,7 @@ public class PartEditDialogController {
 
     }
 
-     // After the validation checks this is called to reset the border around the textFields if they are selected
+    // After the validation checks this is called to reset the border around the textFields if they are selected
     @FXML private void changeTextFieldTextBack(){
 
         if (addPartInventoryTextField.isFocused())
@@ -255,7 +171,7 @@ public class PartEditDialogController {
 
     }
 
-     // different tests for validation of data
+    // different tests for validation of data
     private boolean isInputValid() {
 
         //declare string for error message
@@ -269,21 +185,21 @@ public class PartEditDialogController {
 
         // Check Inv, min, Max and price for ability to be parsed
         for (TextField tf: tempTFAL){
-           try{
-               Integer.parseInt(tf.getText());
-           }catch (NumberFormatException nfe){
+            try{
+                Integer.parseInt(tf.getText());
+            }catch (NumberFormatException nfe){
 
-               errorMessage += "Not a valid input for: "+tf.getPromptText();
-               Alert alert = new Alert(Alert.AlertType.ERROR);
-               alert.initOwner(dialogStage);
-               alert.setTitle("Invalid Fields");
-               alert.setHeaderText("Please correct invalid fields");
-               alert.setContentText(errorMessage);
+                errorMessage += "Not a valid input for: "+tf.getPromptText();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(dialogStage);
+                alert.setTitle("Invalid Fields");
+                alert.setHeaderText("Please correct invalid fields");
+                alert.setContentText(errorMessage);
 
-               alert.showAndWait();
-               tf.setStyle("-fx-border-color:red;");
+                alert.showAndWait();
+                tf.setStyle("-fx-border-color:red;");
 
-           }
+            }
         }
         try{
             Double.parseDouble(addPartPriceTextField.getText());
@@ -372,10 +288,24 @@ public class PartEditDialogController {
             errorMessage += "No valid Part inventory amount!\n";
             addPartInventoryTextField.setStyle("-fx-border-color:red;");
         } else if (Integer.parseInt(addPartInventoryTextField.getText()) > Integer.parseInt(addPartMaxTextField.getText())) {
-            errorMessage += "Current inventory cannot be higher than Maximum!\n";
+            errorMessage += "Current inventory cannot be higher than Max!\n";
             addPartMaxTextField.setStyle("-fx-border-color:red;");
             addPartInventoryTextField.setStyle("-fx-border-color:red;");
         }
+        //check if max and inventory fields are populated then see if the current inventory is higher than Max
+        if (addPartMinTextField.getText() == null || addPartMinTextField.getText().length() == 0) {
+            errorMessage += "Maximum inventory is not set!\n";
+            addPartMinTextField.setStyle("-fx-border-color:red;");
+
+        } else if (addPartInventoryTextField.getText() == null || addPartInventoryTextField.getText().length() == 0) {
+            errorMessage += "No valid Part inventory amount!\n";
+            addPartInventoryTextField.setStyle("-fx-border-color:red;");
+        } else if (Integer.parseInt(addPartInventoryTextField.getText()) < Integer.parseInt(addPartMinTextField.getText())) {
+            errorMessage += "Current inventory cannot be lower than Min!\n";
+            addPartMinTextField.setStyle("-fx-border-color:red;");
+            addPartInventoryTextField.setStyle("-fx-border-color:red;");
+        }
+
 
 
 
@@ -396,6 +326,93 @@ public class PartEditDialogController {
             return false;
         }
     }
+
+
+
+    //Getters
+
+    //gets the label so it can be set to say add or Modify
+    public Label getAddPartLabel() {
+        return addPartLabel;
+    }
+
+
+
+    //Setters
+
+    //this sets the dialog page
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+
+    }
+
+    // this sets the part information from end users select. if edit button was pressed.
+    public void setPart(Part part) {
+
+        if (part instanceof InHouse) {
+
+            this.inHouse = (InHouse) part;
+
+            addPartInHouseRadio.setSelected(true);
+            setRadio();
+            addPartCompanyNameTextField.setText(Integer.toString(((InHouse) part).getMachineID()));
+            addPartIDTextField.setText(Integer.toString(part.getPartID()));
+            addPartPartNameTextField.setText(part.getName());
+            addPartInventoryTextField.setText(Integer.toString(part.getInStock()));
+            addPartMaxTextField.setText(Integer.toString(part.getMax()));
+            addPartMinTextField.setText(Integer.toString(part.getMin()));
+            addPartPriceTextField.setText(Double.toString(part.getPrice()));
+
+        }
+        if (part instanceof Outsourced) {
+
+            this.outSourced = (Outsourced) part;
+            addPartOutsourcedRadio.setSelected(true);
+            setRadio();
+            addPartCompanyNameTextField.setText(((Outsourced) part).getCompanyName());
+            addPartIDTextField.setText(Integer.toString(part.getPartID()));
+            addPartPartNameTextField.setText(part.getName());
+            addPartInventoryTextField.setText(Integer.toString(part.getInStock()));
+            addPartMaxTextField.setText(Integer.toString(part.getMax()));
+            addPartMinTextField.setText(Integer.toString(part.getMin()));
+            addPartPriceTextField.setText(Double.toString(part.getPrice()));
+
+
+        }
+
+
+
+
+    }
+
+    //sets the mainapp object to give reference back to one that called it.
+    public void setMainApp(MainApp mainApp){
+        this.mainApp = mainApp;}
+
+    // if either radio is selected, this sets the information needed
+    private void setRadio(){
+        if (addPartInHouseRadio.isSelected()) {
+            addPartCompanyNameLabel.setText("Machine ID");
+            addPartCompanyNameTextField.setPromptText("Machine ID");
+            addPartCompanyNameTextField.setVisible(true);
+            addPartOutsourcedRadio.setSelected(false);
+
+
+        }
+        if (addPartOutsourcedRadio.isSelected()) {
+            addPartCompanyNameLabel.setText("Company Name");
+            addPartCompanyNameTextField.setPromptText("Company Name");
+            addPartCompanyNameTextField.setVisible(true);
+            addPartInHouseRadio.setSelected(false);
+        }
+
+    }
+
+
+
+
+
+
 }
 
 

@@ -239,7 +239,7 @@ public class MainApp extends Application {
             Random rn2 = new Random();
             double double1 = Math.round(rn2.nextDouble()*100.00) / 100.00;
 
-            inventory.addProduct(new Product(new InHouse(number,Integer.toString(number),number,number,number,number),Integer.toString(number),double1,number,number,number));
+            inventory.addProduct(new Product(new InHouse(number,Integer.toString(number),double1,number,number,number),Integer.toString(number),double1,number,number,number));
 
         }
     }

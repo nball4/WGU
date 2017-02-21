@@ -12,8 +12,11 @@ import java.util.ArrayList;
 public class Inventory {
 
     // Instance Variables
-    private ObservableList<Product> products = FXCollections.observableArrayList();;
+    private ObservableList<Product> products = FXCollections.observableArrayList();
+    private MainApp mainApp;
 
+
+    //Getters and setters
     public ObservableList<Product> getProducts() {
         return products;
     }
@@ -22,21 +25,26 @@ public class Inventory {
         this.products = products;
     }
 
-    private MainApp mainApp;
-
-
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
 
     }
+
+
+    //constructor
     public Inventory() {
     }
 
+
+    //other methods
+
+    //Add product to products list
     public void addProduct(Product product){
 
         this.products.add(product);
     }
 
+    // used methods in ProductEditDialogController for this
     public boolean removeProduct(int int1){
 
         try {
@@ -48,12 +56,14 @@ public class Inventory {
         }
     }
 
+    // used methods in ProductEditDialogController for this
     public Product lookupProduct(int int1){
 
         return this.products.get(int1);
 
     }
 
+    // used methods in ProductEditDialogController for this
     public void updatePart(int int1){
 
 

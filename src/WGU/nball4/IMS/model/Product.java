@@ -101,12 +101,17 @@ public class Product {
         this.max = max;
     }
 
+
+    //other methods
+
+    //Add part to parts list
     public void addPart(Part part){
 
         this.parts.add(part);
 
     }
 
+    // used methods in ProductEditDialogController for this
     public boolean removePart(int int1) {
         try {
             this.parts.remove(int1);
@@ -117,11 +122,13 @@ public class Product {
         }
     }
 
+    // used methods in ProductEditDialogController for this
     public Part lookupPart(int int1){
 
         return this.parts.get(int1);
     }
 
+    // used methods in ProductEditDialogController for this
     public void updatePart(int int1){
 
         int count = 0;

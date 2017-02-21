@@ -8,7 +8,6 @@ public class Outsourced extends Part {
 
     private int companyId;
     private String companyName;
-    private String companyPhone;
 
 
     //Getters and Setters
@@ -28,13 +27,6 @@ public class Outsourced extends Part {
         this.companyName = companyName;
     }
 
-    public String getCompanyPhone() {
-        return companyPhone;
-    }
-
-    public void setCompanyPhone(String companyPhone) {
-        this.companyPhone = companyPhone;
-    }
 
 
 

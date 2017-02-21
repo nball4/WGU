@@ -18,7 +18,7 @@ public class RootLayoutController {
         this.mainApp = mainApp;
     }
 
-    // shows the about page from menu bar.
+    // shows the about me page from menu bar.
     @FXML private void handleAbout() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.initOwner(primaryStage);
@@ -32,6 +32,17 @@ public class RootLayoutController {
     public void setDialogStage(Stage dialogStage) {
         this.primaryStage = dialogStage;
 
+    }
+
+    // shows the about app page from menu bar.
+    @FXML private void handleAboutApp() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.initOwner(primaryStage);
+        alert.setTitle("nball4 - Inventory Management System");
+        alert.setHeaderText("About This App");
+        alert.setContentText("A small manufacturing organization has outgrown its current inventory system.\n\n I developed this app to be a more sophisticated inventory program as a replacement.");
+
+        alert.showAndWait();
     }
 
 }

@@ -84,27 +84,27 @@
                     </GridPane.margin></Label>
 
                 <Label id="AddPartIDLabel" fx:id="addProductIDLabel" text="ID" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                <TextField id="AddPartIDTextField" fx:id="addProductIDTextField" disable="true" editable="false" promptText="Auto Gen - ID" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                <TextField id="AddPartIDTextField" fx:id="addProductIDTextField" onMouseClicked="#handleOnClicked" disable="true" editable="false" promptText="Auto Gen - ID" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
 
                 <Label id="AddPartNameLabel" fx:id="addProductNameLabel" text="Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <TextField id="AddPartPartNameTextField" fx:id="addProductNameTextField" promptText="Product Name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                <TextField id="AddPartPartNameTextField" fx:id="addProductNameTextField" onMouseClicked="#handleOnClicked" promptText="Product Name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
 
                 <Label id="AddPartInventoryLabel" fx:id="addProductInventoryLabel" text="Inventory" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <TextField id="AddPartInventoryTextField" fx:id="addProductInventoryTextField" promptText="Inventory" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                <TextField id="AddPartInventoryTextField" fx:id="addProductInventoryTextField" onMouseClicked="#handleOnClicked" promptText="Inventory" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
 
                 <Label id="AddPartPriceLabel" fx:id="addProductPriceLabel" text="Price/Cost" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <TextField id="AddPartPriceTextField" fx:id="addProductPriceTextField" promptText="Price/Cost" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                <TextField id="AddPartPriceTextField" fx:id="addProductPriceTextField" onMouseClicked="#handleOnClicked" promptText="Price/Cost" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
 
                 <Label id="AddPartMaxLabel" fx:id="addProductMaxLabel" text="Min" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <TextField id="AddPartMaxTextField" fx:id="addProductMaxTextField" promptText="Max" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                <TextField id="AddPartMaxTextField" fx:id="addProductMaxTextField" onMouseClicked="#handleOnClicked" promptText="Max" GridPane.columnIndex="2" GridPane.rowIndex="7" />
 
                 <Label id="AddPartMinLabel" fx:id="addProductMinLabel" text="Max" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                <TextField id="AddPartMinTextField" fx:id="addProductMinTextField" prefHeight="25.0" prefWidth="174.0" promptText="Min" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                <TextField id="AddPartMinTextField" fx:id="addProductMinTextField" onMouseClicked="#handleOnClicked" prefHeight="25.0" prefWidth="174.0" promptText="Min" GridPane.columnIndex="2" GridPane.rowIndex="6" />
 
                 <ButtonBar id="AddPartButtonBar" fx:id="addProductButtonBar" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="9" GridPane.rowSpan="2">
                     <buttons>
                         <Button id="AddPartSaveButton" fx:id="addProductSaveButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleOk" text="Save" />
-                        <Button id="AddPartCancelButton" fx:id="addProductCancelButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+                        <Button id="AddPartCancelButton" fx:id="addProductCancelButton" alignment="CENTER"  mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
                     </buttons>
                 </ButtonBar>
             </children>
