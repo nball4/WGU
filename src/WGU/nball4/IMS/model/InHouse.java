@@ -17,6 +17,7 @@ public class InHouse extends Part {
             this.machineID = machineID;
         }
 
+
         //Constructors
         public InHouse(){
             this.setMachineID(0);
@@ -25,17 +26,17 @@ public class InHouse extends Part {
             this.setMin(0);
             this.setInStock(0);
             this.setName("");
-            this.setPartID(0);
+            this.setPartID();
         }
 
-        public InHouse(int machineID, String name, double price, int inStock, int min, int max, int partID) {
+        public InHouse(int machineID, String name, double price, int inStock, int min, int max) {
             this.setMachineID(machineID);
             this.setName(name);
             this.setPrice(price);
             this.setInStock(inStock);
             this.setMin(min);
             this.setMax(max);
-            this.setPartID(partID);
+            this.setPartID();
 
         }
     }

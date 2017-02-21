@@ -20,6 +20,7 @@ public class Product {
     private int inStock;
     private int min;
     private int max;
+    private static int count = 0;
 
     private MainApp mainApp;
 
@@ -47,8 +48,10 @@ public class Product {
         return productID;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setProductID() {
+
+            this.productID = ++count;
+
     }
 
     public double getPrice() {
@@ -88,10 +91,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(Part part, String name, int productID, double price, int inStock, int min, int max) {
+    public Product(Part part, String name, double price, int inStock, int min, int max) {
         addPart(part);
         this.name = name;
-        this.productID = productID;
+        setProductID();
         this.price = price;
         this.inStock = inStock;
         this.min = min;

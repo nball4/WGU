@@ -24,7 +24,7 @@
                 <AnchorPane>
                     <padding><Insets bottom="5" left="5" right="5" top="5" /> </padding>
                     <Label text="All Parts List" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                    <TextField fx:id="productsAllPartsSearchTextField" alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0" />
+                    <TextField fx:id="productsAllPartsSearchTextField" promptText="Seach Part Name" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0" />
                <ButtonBar layoutX="350.0" layoutY="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <buttons>
                           <Button mnemonicParsing="false" onAction="#searchAllParts" text="Search" />
@@ -73,18 +73,18 @@
 
 
             <GridPane id="PartsGridPane" alignment="CENTER" hgap="10" prefWidth="375.0" vgap="10">
-            <padding><Insets bottom="10" left="10" right="10" top="10" /> </padding>
+                <padding><Insets bottom="10" left="10" right="10" top="10" /> </padding>
 
 
             <children>
 
-                <Label id="addPartLabel" fx:id="addProductLabel" contentDisplay="CENTER" text="Add Product" GridPane.columnSpan="2147483647">
+                <Label id="addPartLabel" fx:id="addProductLabel" contentDisplay="CENTER" text="Modify Product" GridPane.columnSpan="2147483647">
                     <GridPane.margin>
                         <Insets left="20.0" />
                     </GridPane.margin></Label>
 
                 <Label id="AddPartIDLabel" fx:id="addProductIDLabel" text="ID" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                <TextField id="AddPartIDTextField" fx:id="addProductIDTextField" promptText="Auto Gen - ID" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                <TextField id="AddPartIDTextField" fx:id="addProductIDTextField" disable="true" editable="false" promptText="Auto Gen - ID" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
 
                 <Label id="AddPartNameLabel" fx:id="addProductNameLabel" text="Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField id="AddPartPartNameTextField" fx:id="addProductNameTextField" promptText="Product Name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
@@ -101,7 +101,7 @@
                 <Label id="AddPartMinLabel" fx:id="addProductMinLabel" text="Max" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                 <TextField id="AddPartMinTextField" fx:id="addProductMinTextField" prefHeight="25.0" prefWidth="174.0" promptText="Min" GridPane.columnIndex="2" GridPane.rowIndex="6" />
 
-                <ButtonBar id="AddPartButtonBar" fx:id="addProductButtonBar" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="2">
+                <ButtonBar id="AddPartButtonBar" fx:id="addProductButtonBar" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="9" GridPane.rowSpan="2">
                     <buttons>
                         <Button id="AddPartSaveButton" fx:id="addProductSaveButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleOk" text="Save" />
                         <Button id="AddPartCancelButton" fx:id="addProductCancelButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
@@ -110,10 +110,10 @@
             </children>
             <columnConstraints>
                 <ColumnConstraints maxWidth="77.0" minWidth="10.0" prefWidth="33.0" />
-                <ColumnConstraints maxWidth="113.0" minWidth="58.0" prefWidth="69.0" />
-                <ColumnConstraints maxWidth="99.0" minWidth="10.0" prefWidth="99.0" />
-                <ColumnConstraints maxWidth="108.0" minWidth="10.0" prefWidth="43.0" />
-                <ColumnConstraints maxWidth="125.0" minWidth="10.0" prefWidth="98.0" />
+                <ColumnConstraints maxWidth="113.0" minWidth="58.0" prefWidth="79.0" />
+                <ColumnConstraints maxWidth="112.0" minWidth="10.0" prefWidth="112.0" />
+                <ColumnConstraints maxWidth="108.0" minWidth="10.0" prefWidth="14.0" />
+                <ColumnConstraints maxWidth="125.0" minWidth="10.0" prefWidth="32.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="40.0" />
@@ -123,9 +123,10 @@
                 <RowConstraints />
                 <RowConstraints />
                 <RowConstraints />
-                <RowConstraints maxHeight="35.0" minHeight="0.0" prefHeight="25.0" />
-                <RowConstraints minHeight="0.0" />
-                <RowConstraints minHeight="0.0" />
+                <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
             </rowConstraints>
         </GridPane>
         </items>

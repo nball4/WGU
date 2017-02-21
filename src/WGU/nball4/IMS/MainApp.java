@@ -2,7 +2,6 @@ package WGU.nball4.IMS;
 
 import java.io.IOException;
 import java.util.Random;
-
 import WGU.nball4.IMS.model.InHouse;
 import WGU.nball4.IMS.model.Inventory;
 import WGU.nball4.IMS.model.Part;
@@ -19,7 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import WGU.nball4.IMS.view.RootLayoutController;
-import WGU.nball4.IMS.view.PartOverviewController;
+import WGU.nball4.IMS.view.InventoryOverviewController;
 import WGU.nball4.IMS.view.PartEditDialogController;
 
 public class MainApp extends Application {
@@ -35,29 +34,13 @@ public class MainApp extends Application {
     public ObservableList<Part> getPartData(){return partData;}
 
 
-    // Sample data
-    public MainApp(){
-        partData.add(new InHouse(1,"one",1,1,1,1,1));
-        partData.add(new InHouse(1,"two",1,1,1,1,1));
-        partData.add(new InHouse(1,"three",1,1,1,1,1));
-        partData.add(new InHouse(1,"four",1,1,1,1,1));
-        partData.add(new InHouse(1,"five",1,1,1,1,1));
-        partData.add(new InHouse(1,"six",1,1,1,1,1));
-        partData.add(new InHouse(1,"seven",1,1,1,1,1));
+    // creates new inventory object and fake data if needed
+    public MainApp(){inventory = new Inventory(); generateFakeData();}
 
-        partData.add(new InHouse(1,"eight",1,1,1,1,1));
-        partData.add(new InHouse(1,"nine",1,1,1,1,1));
-        partData.add(new InHouse(1,"eight",1,1,1,1,1));
-        partData.add(new InHouse(1,"nine",1,1,1,1,1));
-        partData.add(new InHouse(1,"eight",1,1,1,1,1));
-        partData.add(new InHouse(1,"nine",1,1,1,1,1));
 
-        inventory = new Inventory();
-        generateFakeData();
-    }
+    //General Methods
 
-    //Methods
-
+    //starts the primary stage and calls the shell and overview
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage;
@@ -65,11 +48,12 @@ public class MainApp extends Application {
 
         initRootLayout();
 
-        showPartOverview();
+        showInventoryOverview();
 
 
     }
 
+    //Shell
     private void initRootLayout() {
         try {
             // Load root layout from fxml file.
@@ -82,10 +66,11 @@ public class MainApp extends Application {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
-           // scene.getStylesheets().add(MainApp.class.getResource("util/IMS.css").toExternalForm());
+            scene.getStylesheets().add(MainApp.class.getResource("util/IMS.css").toExternalForm());
 
             // Give the controller access to the main app.
             RootLayoutController controller = loader.getController();
+            controller.setDialogStage(primaryStage);
             controller.setMainApp(this);
 
             primaryStage.show();
@@ -96,11 +81,12 @@ public class MainApp extends Application {
         }
     }
 
-    private void showPartOverview() {
+    //sets up and shows the inventory view / main page
+    private void showInventoryOverview() {
         try {
             // Load part overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PartOverview.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/InventoryOverview.fxml"));
             VBox partOverview = loader.load();
 
 
@@ -108,7 +94,8 @@ public class MainApp extends Application {
             rootLayout.setCenter(partOverview);
 
             // Give the controller access to the main app.
-            PartOverviewController controller = loader.getController();
+            InventoryOverviewController controller = loader.getController();
+            controller.setDialogStage(primaryStage);
             controller.setMainApp(this);
 
         } catch (IOException e) {
@@ -116,6 +103,7 @@ public class MainApp extends Application {
         }
     }
 
+    //sets up and shows the edit part view
     public boolean showPartEditDialog(Part part) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -130,7 +118,7 @@ public class MainApp extends Application {
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
-           // scene.getStylesheets().add(MainApp.class.getResource("util/IMS.css").toExternalForm());
+            scene.getStylesheets().add(MainApp.class.getResource("util/IMS.css").toExternalForm());
 
             // Set the part into the controller.
             PartEditDialogController controller = loader.getController();
@@ -150,6 +138,7 @@ public class MainApp extends Application {
         }
     }
 
+    //sets up and shows the NEW part view
     public void showPartNewDialog() {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -164,7 +153,7 @@ public class MainApp extends Application {
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
-            //scene.getStylesheets().add(MainApp.class.getResource("util/IMS.css").toExternalForm());
+            scene.getStylesheets().add(MainApp.class.getResource("util/IMS.css").toExternalForm());
 
             // Set the part into the controller.
             PartEditDialogController controller = loader.getController();
@@ -184,6 +173,7 @@ public class MainApp extends Application {
         }
     }
 
+    //sets up and shows the edit and new product views
     public boolean showProductEditDialog(Product product) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -201,7 +191,7 @@ public class MainApp extends Application {
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
-            // scene.getStylesheets().add(MainApp.class.getResource("util/IMS.css").toExternalForm());
+            scene.getStylesheets().add(MainApp.class.getResource("util/IMS.css").toExternalForm());
 
             // Set the part into the controller.
             ProductEditDialogController controller = loader.getController();
@@ -223,20 +213,33 @@ public class MainApp extends Application {
         }
     }
 
+    //gets the primary stage
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    //generates fake data gets called from mainapps MainApp method
     private void generateFakeData(){
 
-
+        //generates new inHouse parts
         for (int x=0; x < 10; x++){
             Random rn = new Random();
             int number = rn.nextInt(100 - 1 + 1)+1;
             Random rn2 = new Random();
-            double double1 = rn2.nextDouble();
+            double double1 = Math.round(rn2.nextDouble()*100.00) / 100.00;
 
-            inventory.addProduct(new Product(new InHouse(number,Integer.toString(number),number,number,number,number,number),Integer.toString(number),number,double1,number,number,number));
+           partData.add(new InHouse(number,Integer.toString(number),double1,number,number,number));
+
+        }
+
+        // generates new products
+        for (int x=0; x < 10; x++){
+            Random rn = new Random();
+            int number = rn.nextInt(100 - 1 + 1)+1;
+            Random rn2 = new Random();
+            double double1 = Math.round(rn2.nextDouble()*100.00) / 100.00;
+
+            inventory.addProduct(new Product(new InHouse(number,Integer.toString(number),number,number,number,number),Integer.toString(number),double1,number,number,number));
 
         }
     }

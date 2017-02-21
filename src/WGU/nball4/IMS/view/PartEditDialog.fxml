@@ -14,7 +14,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WGU.nball4.IMS.view.PartEditDialogController">
     <children>
-    <GridPane id="PartsGridPane" alignment="TOP_CENTER" hgap="10" prefHeight="350.0" prefWidth="375.0" vgap="10">
+    <GridPane id="PartsGridPane" alignment="TOP_CENTER" hgap="10" prefWidth="375.0" vgap="10">
         <padding><Insets bottom="10" left="10" right="10" top="10" /> </padding>
 
 
@@ -33,27 +33,27 @@
             <RadioButton id="AddPartOutsourcedRadio" fx:id="addPartOutsourcedRadio" mnemonicParsing="false" onAction="#radioSelect" text="Outsourced" toggleGroup="$ToggleGroup" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" />
 
             <Label id="AddPartIDLabel" fx:id="addPartIDLabel" text="ID" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            <TextField id="AddPartIDTextField" fx:id="addPartIDTextField" promptText="Auto Gen - ID" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <TextField id="AddPartIDTextField" fx:id="addPartIDTextField" disable="true" editable="false" promptText="Auto Gen - ID" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
 
             <Label id="AddPartNameLabel" fx:id="addPartNameLabel" text="Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField id="AddPartPartNameTextField" fx:id="addPartPartNameTextField" promptText="Part Name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextField id="AddPartPartNameTextField" fx:id="addPartPartNameTextField" onMouseClicked="#handleOnClicked" promptText="Part Name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
 
             <Label id="AddPartInventoryLabel" fx:id="addPartInventoryLabel" text="Inventory" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField id="AddPartInventoryTextField" fx:id="addPartInventoryTextField" promptText="Inventory" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <TextField id="AddPartInventoryTextField" fx:id="addPartInventoryTextField" onMouseClicked="#handleOnClicked" promptText="Inventory" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
 
             <Label id="AddPartPriceLabel" fx:id="addPartPriceLabel" text="Price/Cost" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField id="AddPartPriceTextField" fx:id="addPartPriceTextField" promptText="Price/Cost" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+            <TextField id="AddPartPriceTextField" fx:id="addPartPriceTextField" promptText="Price/Cost" onMouseClicked="#handleOnClicked" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
 
             <Label id="AddPartMaxLabel" fx:id="addPartMaxLabel" text="Min" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField id="AddPartMaxTextField" fx:id="addPartMaxTextField" promptText="Max" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <TextField id="AddPartMaxTextField" fx:id="addPartMaxTextField" promptText="Max" onMouseClicked="#handleOnClicked" GridPane.columnIndex="4" GridPane.rowIndex="6" />
 
             <Label id="AddPartMinLabel" fx:id="addPartMinLabel" alignment="CENTER_RIGHT" text="Max" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <TextField id="AddPartMinTextField" fx:id="addPartMinTextField" prefHeight="25.0" prefWidth="174.0" promptText="Min" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <TextField id="AddPartMinTextField" fx:id="addPartMinTextField" prefHeight="25.0" onMouseClicked="#handleOnClicked" prefWidth="174.0" promptText="Min" GridPane.columnIndex="2" GridPane.rowIndex="6" />
 
             <Label id="AddPartCompanyNameLabel" fx:id="addPartCompanyNameLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField id="AddPartCompanyNameTextField" fx:id="addPartCompanyNameTextField"  promptText="Machine ID" visible="false" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+            <TextField id="AddPartCompanyNameTextField" fx:id="addPartCompanyNameTextField" onMouseClicked="#handleOnClicked" promptText="Machine ID" visible="false" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
 
-            <ButtonBar id="AddPartButtonBar" fx:id="addPartButtonBar" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="2">
+            <ButtonBar id="AddPartButtonBar" fx:id="addPartButtonBar" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" GridPane.rowSpan="2">
                 <buttons>
                     <Button id="AddPartSaveButton" fx:id="addPartSaveButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleOk" text="Save" />
                     <Button id="AddPartCancelButton" fx:id="addPartCancelButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
@@ -62,11 +62,11 @@
 
         </children>
         <columnConstraints>
-            <ColumnConstraints maxWidth="77.0" minWidth="10.0" prefWidth="33.0" />
-            <ColumnConstraints maxWidth="113.0" minWidth="58.0" prefWidth="69.0" />
-            <ColumnConstraints maxWidth="99.0" minWidth="10.0" prefWidth="99.0" />
-            <ColumnConstraints maxWidth="108.0" minWidth="10.0" prefWidth="43.0" />
-            <ColumnConstraints maxWidth="125.0" minWidth="10.0" prefWidth="98.0" />
+            <ColumnConstraints maxWidth="77.0" minWidth="0.0" prefWidth="0.0" />
+            <ColumnConstraints maxWidth="113.0" minWidth="58.0" prefWidth="92.0" />
+            <ColumnConstraints maxWidth="113.0" minWidth="10.0" prefWidth="103.0" />
+            <ColumnConstraints maxWidth="108.0" minWidth="10.0" prefWidth="37.0" />
+            <ColumnConstraints maxWidth="125.0" minWidth="10.0" prefWidth="84.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="40.0" />
@@ -76,9 +76,11 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
-            <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" />
-            <RowConstraints />
-            <RowConstraints />
+            <RowConstraints maxHeight="40.0" minHeight="20.0" prefHeight="35.0" />
+            <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="0.0" />
+            <RowConstraints maxHeight="10.0" minHeight="5.0" prefHeight="5.0" />
+            <RowConstraints maxHeight="10.0" minHeight="5.0" prefHeight="5.0" />
+            <RowConstraints maxHeight="10.0" minHeight="5.0" prefHeight="5.0" />
         </rowConstraints>
 
 

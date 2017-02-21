@@ -5,17 +5,12 @@ import WGU.nball4.IMS.MainApp;
 import WGU.nball4.IMS.model.Part;
 import WGU.nball4.IMS.model.Product;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArrayBase;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import WGU.nball4.IMS.MainApp;
-
 import java.util.Comparator;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 
 /**
@@ -70,8 +65,7 @@ public class ProductEditDialogController {
 
     public void setMainApp(MainApp mainApp){
         this.mainApp = mainApp;
-        ObservableList<Part> tempData = mainApp.getPartData().stream().sorted(Comparator.comparing(Part::getName)).collect(Collectors.toCollection(()-> FXCollections.observableArrayList()));
-        allPartsTable.setItems(tempData);
+        allPartsTable.setItems(mainApp.getPartData().sorted(Comparator.comparing(Part::getName)));
 
 
     }
@@ -86,7 +80,7 @@ public class ProductEditDialogController {
             product.setInStock(Integer.parseInt(addProductInventoryTextField.getText()));
             product.setMax(Integer.parseInt(addProductMaxTextField.getText()));
             product.setMin(Integer.parseInt(addProductMinTextField.getText()));
-            product.setProductID(Integer.parseInt(addProductIDTextField.getText()));
+            product.setProductID();
             product.setParts(currentPartsTable.getItems());
             okClicked = true;
 
@@ -190,9 +184,6 @@ public class ProductEditDialogController {
         if (addProductNameTextField.getText() == null || addProductNameTextField.getText().length() == 0) {
             errorMessage += "No valid Product name!\n";
         }
-        if (addProductIDTextField.getText() == null || addProductIDTextField.getText().length() == 0) {
-            errorMessage += "No valid Product ID!\n";
-        }
         if (addProductInventoryTextField.getText() == null || addProductInventoryTextField.getText().length() == 0) {
             errorMessage += "No valid Product inventory amount!\n";
         }
@@ -209,7 +200,7 @@ public class ProductEditDialogController {
             errorMessage += "No Part added to product!\n";
         }
         for(Part part : currentPartsTable.getItems()){
-            if (Integer.parseInt(addProductPriceTextField.getText()) < part.getPrice()){
+            if (Double.parseDouble(addProductPriceTextField.getText()) < part.getPrice()){
                 errorMessage += "Product Price lower than an individual part!\n";
 
             }
@@ -299,7 +290,7 @@ public class ProductEditDialogController {
             }
 
 
-        }
+}
 
 
 

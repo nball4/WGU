@@ -15,6 +15,7 @@ public abstract class Part {
     private int inStock;
     private int min;
     private int max;
+    private static int count = 0;
 
     //Getters and Setters
     public String getName() {
@@ -61,8 +62,8 @@ public abstract class Part {
         return partID;
     }
 
-    public void setPartID(int partID) {
-        this.partID = partID;
+    public void setPartID() {
+        this.partID = ++count;
     }
 }
 
